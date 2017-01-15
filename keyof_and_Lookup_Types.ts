@@ -60,10 +60,18 @@ type P5 = string[][0];              // string
 // keyof 쿼리 와 type alias 를 이용하여,  type-safe lookups 시스템을 사용할 수 있습니다.
 
 function getProperty<T, K extends keyof T>(obj: T, key: K) {
-    return obj[key];  // Inferred type is T[K]
+    return obj[key];  // 추론돤 타입
 }
 
 function setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
+    obj[key] = value;
+}
+
+function getPropertyNoKeyof(obj, key) {
+    return obj[key];  // Inferred type is T[K]
+}
+
+function setPropertyNoKeyof(obj, key, value) {
     obj[key] = value;
 }
 
@@ -75,5 +83,8 @@ const bar = getProperty(x, 'bar');
 console.log(typeof foo); // number
 console.log(typeof bar); // string
 
-// let oops = getProperty(x, 'wargarbl'); // Error! "wargarbl" is not "foo" | "bar"
-// setProperty(x, 'foo', 'string'); // Error!, string expected number
+// const oops = getPropertyNoKeyof(x, 'wargarbl'); // 컴파일 터임엔 에러가 없지만, 런타임에 문제가 생깁니다.
+// console.log(oops); // undefined
+// const oops = getProperty(x, 'wargarbl'); // 컴파일 타임에 에러 Error! "wargarbl" is not "foo" | "bar"
+// setPropertyNoKeyof(x, 'foo', 'string'); // 컴파일 타임엔 에러가 없지만 의도치 않게 타입이 바뀝니다.
+// setProperty(x, 'foo', 'string'); // 컴파일 타입에 에러 Error!, string expected number
