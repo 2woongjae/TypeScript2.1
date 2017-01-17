@@ -83,8 +83,8 @@ const bar = getProperty(x, 'bar');
 console.log(typeof foo); // number
 console.log(typeof bar); // string
 
-// const oops = getPropertyNoKeyof(x, 'wargarbl'); // 컴파일 터임엔 에러가 없지만, 런타임에 문제가 생깁니다.
+// const oops = getPropertyNoKeyof(x, 'wargarbl'); // 컴파일 타임엔 에러가 없지만, 런타임에 문제가 생깁니다.
 // console.log(oops); // undefined
 // const oops = getProperty(x, 'wargarbl'); // 컴파일 타임에 에러 Error! "wargarbl" is not "foo" | "bar"
 // setPropertyNoKeyof(x, 'foo', 'string'); // 컴파일 타임엔 에러가 없지만 의도치 않게 타입이 바뀝니다.
-// setProperty(x, 'foo', 'string'); // 컴파일 타입에 에러 Error!, string expected number
+// setProperty(x, 'foo', 'string'); // 컴파일 타임에 에러 Error!, string expected number
